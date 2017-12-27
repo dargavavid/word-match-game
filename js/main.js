@@ -4,6 +4,7 @@ class Word {
         this.x = x;
         this.y = y;
         this.vy = vy;
+        this.isFalling = true;
     }
     fall() {
         this.y -= this.vy;
@@ -13,7 +14,8 @@ class Word {
 const app = {
     canvas: document.querySelector("#canvas"),
     ctx: this.canvas.getContext("2d"),
-    dict: null
+    dict: null,
+    words: []
 };
 
 function fetchAndSetDictionary() {
@@ -25,6 +27,8 @@ function getRandomWord() {
     return words[roll];
 }
 
-
+function getRandomWords(n = 5) {
+    return new Array(n).fill(0).map(x => getRandomWord());
+}
 
 fetchAndSetDictionary();
