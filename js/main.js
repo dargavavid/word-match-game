@@ -5,9 +5,9 @@ const app = {
     words: [],
     settings: {
         wordMinVy: 1,
-        wordMaxVy: 5,
+        wordMaxVy: 2,
         fontFamily: "Georgia",
-        fontSize: 20
+        fontSize: 15
     }
 };
 
@@ -52,7 +52,7 @@ function makeRandomWordsObj(n, a = app) {
     const words = getRandomWords(n);
     return words.map(word => {
         const vy = getRandomBetween(settings.wordMinVy, settings.wordMaxVy);
-        const x = getRandomBetween(0, canvas.width - 100), y = getRandomBetween(0, -100);
+        const x = getRandomBetween(0, canvas.width - (word.length * settings.fontSize)), y = getRandomBetween(0, -300);
         return new Word(word, x, y, vy);
     });
 }
