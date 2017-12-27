@@ -23,8 +23,7 @@ class Word {
         this.y = y;
         this.vy = vy;
         this.color = color;
-        this.isFalling = true;
-        this.isMatched = false;
+        this.value = calculateValue();
     }
     fall() {
         this.y += this.vy;
@@ -47,6 +46,10 @@ class Word {
         this.y = y;
         this.vy = vy;
         this.color = color;
+        this.value = this.calculateValue();
+    }
+    calculateValue() {
+        return (this.word.length * 10) * this.vy;
     }
 }
 
