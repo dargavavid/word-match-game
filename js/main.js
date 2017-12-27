@@ -10,7 +10,8 @@ const app = {
         fontFamily: "Georgia",
         fontSize: 15,
         fontColors: ["limegreen", "dodgerblue", "crimson", "white"]
-    }
+    },
+    points: 0,
 };
 
 class Word {
@@ -94,10 +95,22 @@ function checkAndHandleWordsHeight(a = app) {
     });
 }
 
+function handleKeyboardInput(e, a = app) {
+    const char = e.key;
+    a.typedStr += char;
+    console.log(a.typedStr);
+}
+
+function setEventListeners() {
+    document.addEventListener("keydown", handleKeyboardInput, false);
+}
+
 function checkAndHandleWordsMatch(a = app) {
     a.words.forEach(wordObj => {
         if (a.typedStr.toUpperCase().includes(wordObj.word)) {
             wordObj.respawn();
+            a.points += 100;
+            a.typedStr = "";//Reset typed string.
         }
     });
 }
@@ -117,6 +130,7 @@ function mainLoop() {
 
 function initApp(wait = 500) {
     setTimeout(function() {
+        setEventListeners();
         app.words = makeRandomWordsObj(5);
         mainLoop();
     }, wait);
