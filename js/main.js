@@ -114,8 +114,9 @@ function checkAndHandleWordsMatch(a = app) {
     a.words.forEach(wordObj => {
         if (a.typedStr.toUpperCase().includes(wordObj.word)) {
             wordObj.respawn();
-            a.score += 100;
+            a.score += wordObj.value;
             a.typedStr = "";//Reset typed string.
+            displayScore();
         }
     });
 }
@@ -146,7 +147,7 @@ function handleKeyboardCommands(e) {
 }
 
 function displayScore() {
-    app.scoreDiv.innerText = app.score;
+    app.scoreDiv.innerText = "0000000".slice(Math.floor(Math.log10(app.score)) + 1) + app.score;
 }
 
 function initApp(wait = 500) {
