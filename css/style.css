@@ -14,18 +14,19 @@ body {
 }
 
 #canvas {
-    background-color: black;
+    margin: auto;
+    background-color: #222;
 }
 
 .score {
     width: 500px;
     height: 50px;
-    background-color: seagreen;
+    background-color: rebeccapurple;
     font-size: 40px;
     font-weight: 600;
     color: white;
     line-height: 50px;
     letter-spacing: 10px;
     text-align: center;
-    border: white solid 2px;
+    /* border: white solid 2px; */
 }
