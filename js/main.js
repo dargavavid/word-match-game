@@ -12,7 +12,7 @@ const app = {
         fontSize: 15,
         fontColors: ["limegreen", "dodgerblue", "crimson", "white"]
     },
-    points: 0,
+    score: 0,
     isRunning: true
 };
 
@@ -114,7 +114,7 @@ function checkAndHandleWordsMatch(a = app) {
     a.words.forEach(wordObj => {
         if (a.typedStr.toUpperCase().includes(wordObj.word)) {
             wordObj.respawn();
-            a.points += 100;
+            a.score += 100;
             a.typedStr = "";//Reset typed string.
         }
     });
@@ -143,6 +143,10 @@ function handleKeyboardCommands(e) {
     if (e.keyCode === 17) {//lctrl -> pause app
         toggleAppPause();
     }
+}
+
+function displayScore() {
+    app.scoreDiv.innerText = app.score;
 }
 
 function initApp(wait = 500) {

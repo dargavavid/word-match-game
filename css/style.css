@@ -21,5 +21,11 @@ body {
     width: 500px;
     height: 50px;
     background-color: seagreen;
+    font-size: 40px;
+    font-weight: 600;
+    color: white;
+    line-height: 50px;
+    letter-spacing: 10px;
+    text-align: center;
     border: white solid 2px;
 }
