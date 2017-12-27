@@ -7,16 +7,18 @@ const app = {
         wordMinVy: 1,
         wordMaxVy: 2,
         fontFamily: "Georgia",
-        fontSize: 15
+        fontSize: 15,
+        fontColors: ["limegreen", "dodgerblue", "crimson", "white"]
     }
 };
 
 class Word {
-    constructor(word, x, y, vy) {
+    constructor(word, x, y, vy, color = "white") {
         this.word = word;
         this.x = x;
         this.y = y;
         this.vy = vy;
+        this.color = color;
         this.isFalling = true;
         this.isMatched = false;
     }
@@ -24,6 +26,7 @@ class Word {
         this.y += this.vy;
     }
     draw(context, a = app) {
+        context.fillStyle = this.color;
         context.font = `${a.settings.fontSize}px ${a.settings.fontFamily}`;
         context.fillText(this.word, this.x, this.y);
     }
@@ -52,8 +55,10 @@ function makeRandomWordsObj(n, a = app) {
     const words = getRandomWords(n);
     return words.map(word => {
         const vy = getRandomBetween(settings.wordMinVy, settings.wordMaxVy);
-        const x = getRandomBetween(0, canvas.width - (word.length * settings.fontSize)), y = getRandomBetween(0, -300);
-        return new Word(word, x, y, vy);
+        const x = getRandomBetween(0, canvas.width - (word.length * settings.fontSize)), y = getRandomBetween(0, -a.canvas.height);
+        const colorRoll = Math.floor(Math.random() * settings.fontColors.length);
+        const color = settings.fontColors[colorRoll];
+        return new Word(word, x, y, vy, color);
     });
 }
 
