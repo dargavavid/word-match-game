@@ -3,9 +3,10 @@ const app = {
     ctx: this.canvas.getContext("2d"),
     dict: null,
     words: [],
+    typedStr: "",
     settings: {
         wordMinVy: 1,
-        wordMaxVy: 2,
+        wordMaxVy: 3,
         fontFamily: "Georgia",
         fontSize: 15,
         fontColors: ["limegreen", "dodgerblue", "crimson", "white"]
@@ -77,19 +78,26 @@ function makeRandomWordsObj(n, a = app) {
 }
 
 function moveWords(a = app) {
-    a.words.forEach(word => word.fall());
+    a.words.forEach(wordObj => wordObj.fall());
 }
 
 function drawWords(a = app) {
-    a.words.forEach(word => word.draw(app.ctx));
+    a.words.forEach(wordObj => wordObj.draw(app.ctx));
 }
 
 function checkAndHandleWordsHeight(a = app) {
     const maxHeight = a.canvas.height;
-    a.words.forEach(word => {
-        if (word.y > maxHeight) {
-            //reroll
-            word.respawn();
+    a.words.forEach(wordObj => {
+        if (wordObj.y > maxHeight) {
+            wordObj.respawn();
+        }
+    });
+}
+
+function checkAndHandleWordsMatch(a = app) {
+    a.words.forEach(wordObj => {
+        if (a.typedStr.toUpperCase().includes(wordObj.word)) {
+            wordObj.respawn();
         }
     });
 }
@@ -101,6 +109,7 @@ function clearCanvas(a = app) {
 function mainLoop() {
     window.requestAnimationFrame(mainLoop);
     checkAndHandleWordsHeight();
+    checkAndHandleWordsMatch();
     moveWords();
     clearCanvas();
     drawWords();
@@ -108,7 +117,7 @@ function mainLoop() {
 
 function initApp(wait = 500) {
     setTimeout(function() {
-        app.words = makeRandomWordsObj(10);
+        app.words = makeRandomWordsObj(5);
         mainLoop();
     }, wait);
 }
