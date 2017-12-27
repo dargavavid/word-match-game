@@ -16,3 +16,10 @@ body {
 #canvas {
     background-color: black;
 }
+
+.score {
+    width: 500px;
+    height: 50px;
+    background-color: seagreen;
+    border: white solid 2px;
+}

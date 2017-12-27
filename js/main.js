@@ -1,6 +1,7 @@
 const app = {
     canvas: document.querySelector("#canvas"),
     ctx: this.canvas.getContext("2d"),
+    scoreDiv: document.querySelector(".score"),
     dict: null,
     words: [],
     typedStr: "",
@@ -12,6 +13,7 @@ const app = {
         fontColors: ["limegreen", "dodgerblue", "crimson", "white"]
     },
     points: 0,
+    isRunning: true
 };
 
 class Word {
@@ -98,11 +100,11 @@ function checkAndHandleWordsHeight(a = app) {
 function handleKeyboardInput(e, a = app) {
     const char = e.key;
     a.typedStr += char;
-    console.log(a.typedStr);
 }
 
 function setEventListeners() {
     document.addEventListener("keydown", handleKeyboardInput, false);
+    document.addEventListener("keydown", handleKeyboardCommands, false);
 }
 
 function checkAndHandleWordsMatch(a = app) {
@@ -121,11 +123,23 @@ function clearCanvas(a = app) {
 
 function mainLoop() {
     window.requestAnimationFrame(mainLoop);
-    checkAndHandleWordsHeight();
-    checkAndHandleWordsMatch();
-    moveWords();
-    clearCanvas();
-    drawWords();
+    if (app.isRunning) {
+        checkAndHandleWordsHeight();
+        checkAndHandleWordsMatch();
+        moveWords();
+        clearCanvas();
+        drawWords();
+    }
+}
+
+function toggleAppPause(a = app) {
+    a.isRunning = !a.isRunning;
+}
+
+function handleKeyboardCommands(e) {
+    if (e.keyCode === 17) {//lctrl -> pause app
+        toggleAppPause();
+    }
 }
 
 function initApp(wait = 500) {
