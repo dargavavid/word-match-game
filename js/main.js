@@ -61,9 +61,17 @@ function moveWords() {
     app.words.forEach(word => word.fall());
 }
 
+function drawWords() {
+    app.words.forEach(word => word.draw(app.ctx));
+}
+
 function clearCanvas(a = app) {
     a.ctx.clearRect(0, 0, a.canvas.width, a.canvas.height);
 }
 
+function mainLoop() {
+    window.requestAnimationFrame(mainLoop);
+    clearCanvas();
+}
 
 fetchAndSetDictionary();
