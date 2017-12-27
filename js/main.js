@@ -115,6 +115,8 @@ function setEventListeners() {
 function checkAndHandleWordsMatch(a = app) {
     a.words.forEach(wordObj => {
         if (a.typedStr.toUpperCase().includes(wordObj.word)) {
+            a.matchSound.pause();
+            a.matchSound.currentTime = 0;
             a.matchSound.play();
             displayLastWordInfo(wordObj);
             wordObj.respawn();

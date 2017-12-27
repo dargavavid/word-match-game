@@ -48,6 +48,13 @@ body {
     font-size: 35px;
 }
 
+.last-word-value {
+    font-size: 30px;
+}
+
 .last-word-definition {
+    padding: 15px;
+    background-color: rgba(100, 50, 255, 0.25);
     font-style: italic;
+    border-radius: 1%;
 }
