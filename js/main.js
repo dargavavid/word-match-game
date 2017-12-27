@@ -57,4 +57,7 @@ function makeRandomWordsObj(n, a = app) {
     });
 }
 
+function moveWords() {
+    app.words.forEach(word => word.fall());
+}
 fetchAndSetDictionary();
