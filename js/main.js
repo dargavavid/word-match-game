@@ -5,7 +5,7 @@ const app = {
     words: [],
     settings: {
         wordMinVy: 1,
-        wordMaxVy: 10,
+        wordMaxVy: 5,
         fontFamily: "Georgia",
         fontSize: 20
     }
@@ -21,7 +21,7 @@ class Word {
         this.isMatched = false;
     }
     fall() {
-        this.y -= this.vy;
+        this.y += this.vy;
     }
     draw(context, a = app) {
         context.font = `${a.settings.fontSize}px ${a.settings.fontFamily}`;
@@ -52,7 +52,7 @@ function makeRandomWordsObj(n, a = app) {
     const words = getRandomWords(n);
     return words.map(word => {
         const vy = getRandomBetween(settings.wordMinVy, settings.wordMaxVy);
-        const x = getRandomBetween(0, canvas.width - 100), y = 50;
+        const x = getRandomBetween(0, canvas.width - 100), y = getRandomBetween(0, -100);
         return new Word(word, x, y, vy);
     });
 }
@@ -71,7 +71,17 @@ function clearCanvas(a = app) {
 
 function mainLoop() {
     window.requestAnimationFrame(mainLoop);
+    moveWords();
     clearCanvas();
+    drawWords();
+}
+
+function initApp(wait = 500) {
+    setTimeout(function() {
+        app.words = makeRandomWordsObj(10);
+        mainLoop();
+    }, wait);
 }
 
 fetchAndSetDictionary();
+initApp();
