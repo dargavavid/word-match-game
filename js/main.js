@@ -30,6 +30,20 @@ class Word {
         context.font = `${a.settings.fontSize}px ${a.settings.fontFamily}`;
         context.fillText(this.word, this.x, this.y);
     }
+    respawn(a = app) {
+        const canvas = a.canvas;
+        const settings = a.settings;
+        const word = getRandomWord();
+        const vy = getRandomBetween(settings.wordMinVy, settings.wordMaxVy);
+        const x = getRandomBetween(0, canvas.width - (word.length * settings.fontSize)), y = getRandomBetween(0, -a.canvas.height);
+        const colorRoll = Math.floor(Math.random() * settings.fontColors.length);
+        const color = settings.fontColors[colorRoll];
+        this.word = word;
+        this.x = x;
+        this.y = y;
+        this.vy = vy;
+        this.color = color;
+    }
 }
 
 function fetchAndSetDictionary() {
@@ -75,7 +89,7 @@ function checkAndHandleWordsHeight(a = app) {
     a.words.forEach(word => {
         if (word.y > maxHeight) {
             //reroll
-            console.log("reroll word");
+            word.respawn();
         }
     });
 }
