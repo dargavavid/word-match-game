@@ -62,12 +62,22 @@ function makeRandomWordsObj(n, a = app) {
     });
 }
 
-function moveWords() {
-    app.words.forEach(word => word.fall());
+function moveWords(a = app) {
+    a.words.forEach(word => word.fall());
 }
 
-function drawWords() {
-    app.words.forEach(word => word.draw(app.ctx));
+function drawWords(a = app) {
+    a.words.forEach(word => word.draw(app.ctx));
+}
+
+function checkAndHandleWordsHeight(a = app) {
+    const maxHeight = a.canvas.height;
+    a.words.forEach(word => {
+        if (word.y > maxHeight) {
+            //reroll
+            console.log("reroll word");
+        }
+    });
 }
 
 function clearCanvas(a = app) {
@@ -76,6 +86,7 @@ function clearCanvas(a = app) {
 
 function mainLoop() {
     window.requestAnimationFrame(mainLoop);
+    checkAndHandleWordsHeight();
     moveWords();
     clearCanvas();
     drawWords();
