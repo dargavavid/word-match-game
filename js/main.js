@@ -114,6 +114,7 @@ function setEventListeners() {
 function checkAndHandleWordsMatch(a = app) {
     a.words.forEach(wordObj => {
         if (a.typedStr.toUpperCase().includes(wordObj.word)) {
+            displayLastWordInfo(wordObj);
             wordObj.respawn();
             a.score += wordObj.value;
             a.typedStr = "";//Reset typed string.
@@ -149,6 +150,16 @@ function handleKeyboardCommands(e) {
 
 function displayScore() {
     app.scoreDiv.innerText = "0000000".slice(Math.floor(Math.log10(app.score)) + 1) + app.score;
+}
+
+function displayLastWordInfo(lastWordObj, a = app) {
+    const word = lastWordObj.word;
+    const value = lastWordObj.value;
+    const definition = app.dict[word];
+    const info = [word, value, definition];
+    [...a.lastWordDiv.children].forEach( (div, i) => {
+        div.innerText = info[i];
+    });
 }
 
 function initApp(wait = 500) {

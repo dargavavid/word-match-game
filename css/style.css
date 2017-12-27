@@ -37,3 +37,17 @@ body {
     text-align: center;
     /* border: white solid 2px; */
 }
+
+.last-word {
+    width: 500px;
+    text-align: center;
+    color: white;
+}
+
+.last-word-word {
+    font-size: 35px;
+}
+
+.last-word-definition {
+    font-style: italic;
+}
