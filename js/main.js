@@ -10,6 +10,10 @@ class Word {
     fall() {
         this.y -= this.vy;
     }
+    draw(context, a) {
+        context.font = `${a.settings.fontSize}px ${a.settings.fontFamily}`;
+        context.fillText(this.word, this.x, this.y);
+    }
 }
 
 const app = {
@@ -48,7 +52,7 @@ function makeRandomWordsObj(n, a = app) {
     const words = getRandomWords(n);
     return words.map(word => {
         const vy = getRandomBetween(settings.wordMinVy, settings.wordMaxVy);
-        const x = getRandomBetween(0, canvas.width - 100), y = -100;
+        const x = getRandomBetween(0, canvas.width - 100), y = 50;
         return new Word(word, x, y, vy);
     });
 }
