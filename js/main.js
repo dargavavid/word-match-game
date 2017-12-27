@@ -9,4 +9,9 @@ function fetchAndSetDictionary() {
 }
 
 
+function getRandomWord() {
+    const words = Object.keys(app.dict), roll = Math.floor(Math.random() * words.length);
+    return words[roll];
+}
+
 fetchAndSetDictionary();
