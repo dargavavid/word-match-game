@@ -2,6 +2,7 @@ const app = {
     canvas: document.querySelector("#canvas"),
     ctx: this.canvas.getContext("2d"),
     scoreDiv: document.querySelector(".score"),
+    lastWordDiv: document.querySelector(".last-word"),
     dict: null,
     words: [],
     typedStr: "",
