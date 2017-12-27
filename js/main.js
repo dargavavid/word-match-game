@@ -14,7 +14,8 @@ const app = {
         fontColors: ["limegreen", "dodgerblue", "crimson", "white"]
     },
     score: 0,
-    isRunning: true
+    isRunning: true,
+    matchSound: new Audio("../sound/match.ogg")
 };
 
 class Word {
@@ -114,6 +115,7 @@ function setEventListeners() {
 function checkAndHandleWordsMatch(a = app) {
     a.words.forEach(wordObj => {
         if (a.typedStr.toUpperCase().includes(wordObj.word)) {
+            a.matchSound.play();
             displayLastWordInfo(wordObj);
             wordObj.respawn();
             a.score += wordObj.value;
